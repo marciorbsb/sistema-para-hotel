@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Lista Serviços Cadastrados</title>
 </head>
 <body>
-teste
+
+<h3>Lista de Serviços Cadastrados</h3>
+
+<!--  CARREGAR LISTA, POR BOTAO EDITAR E DELETAR DO LADO, AO CLICAR, VAI PARA A PAGINA ESPECIFICA -->
+
 </body>
 </html>

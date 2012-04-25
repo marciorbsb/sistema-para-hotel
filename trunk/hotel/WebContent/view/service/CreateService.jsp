@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Cadastrar Novo Serviço</title>
 </head>
 <body>
-teste
+
+<h3> Cadastrar Novo Serviço </h3>
+
+Nome: <input name="nome" type="text"> <br />
+Valor: <input name="valor" type="text">
+<br />
+
+<button name="bt_Save_Service">Salvar</button>
+
 </body>
 </html>
