@@ -123,4 +123,90 @@ public class ServiceDAO {
 		
 		
 	}
+	
+	
+	public static Servico getServiceByNameAndValue(String name, float value) {
+		Servico servico = new Servico();
+
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Servico where nome='" + name + "' and valor=" + value);
+			servico = (Servico) query.list().get(0);
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return servico;
+	}
+	
+	public static Servico getServiceById(long id) {
+		Servico servico = new Servico();
+
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Servico where id=" + id);
+			servico = (Servico) query.list().get(0);
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return servico;
+	}
+	
+	
+	public static boolean deleteService(long id) {
+		Servico servico = new Servico();
+		
+		servico = getServiceById(id);
+		
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+				SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			session.delete(servico);
+			session.flush();
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return true;
+
+	}
 }

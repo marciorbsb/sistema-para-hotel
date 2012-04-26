@@ -9,7 +9,7 @@
 <body>
 
 <h3> Cadastrar Novo Serviço </h3>
-<form action="../../addService" method="post">
+<form action="../../addService" method="get">
 
 Nome: <input name="name" type="text"> <br />
 Valor: <input name="value" type="text">
