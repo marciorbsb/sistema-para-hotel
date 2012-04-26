@@ -27,6 +27,7 @@
         <mapping class="br.ufc.apsoo.entidades.Servico"/>
         <mapping class="br.ufc.apsoo.entidades.Telefone"/>
         <mapping class="br.ufc.apsoo.entidades.Tipo"/>
+        <mapping class="br.ufc.apsoo.entidades.Reserva"/>
         
         <!--  <property name="transaction.factory_class">
             org.hibernate.transaction.JTATransactionFactory
