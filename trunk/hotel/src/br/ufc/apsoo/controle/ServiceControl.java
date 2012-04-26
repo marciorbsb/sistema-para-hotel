@@ -1,13 +1,16 @@
 package br.ufc.apsoo.controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufc.apsoo.DAO.ServiceDAO;
+import br.ufc.apsoo.entidades.Servico;
 
 public class ServiceControl extends HttpServlet{
 @Override
@@ -15,10 +18,28 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 	
 	super.service(request, response);
-	System.out.println("aeeeeeeeee");
+	
+	//listService(request, response); testado ok
+	//ServiceDAO.EditService(1, "jose", 12); testado ok
 	
 	String name = request.getParameter("name");
 	String value = request.getParameter("value");
+	String type = request.getParameter("type");
+	
+	if(type.equals("add")){
+		
+	addService(name, value, request, response);
+	
+	}else if(type.equals("edit"))
+	{
+		
+	}
+	
+}
+
+private void addService(String name, String value, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+{
+	
 	
 	System.out.println("name: " + name + "Value: " + value);
 	
@@ -36,7 +57,8 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		response.getWriter().write("</html>");
 		*/
 		System.out.println("Sucesso, cadastrou!");
-		//response.sendRedirect("/view/sucess/SucessService.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/sucess/SucessService.jsp");
+        rd.forward(request, response);
 	}else
 	{
 		response.getWriter().write("<html>");
@@ -45,22 +67,17 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		response.getWriter().write("</h1>");
 		response.getWriter().write("</html>");
 		
-	}
-	
+	}	
 }
 
-@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+private void listService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+{
+	ArrayList<Servico> listServicos = ServiceDAO.ListServices();
+	
+	/*TEST - OK LISTANDO*/
+	for (Servico servico : listServicos) {
+		System.out.println(servico.getNome() + "\n");
 	}
-
-@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
-	}
+}
 
 }

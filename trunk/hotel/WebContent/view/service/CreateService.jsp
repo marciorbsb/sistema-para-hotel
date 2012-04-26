@@ -13,6 +13,7 @@
 
 Nome: <input name="name" type="text"> <br />
 Valor: <input name="value" type="text">
+<input name="type" type="hidden" value="add">
 <br />
 
 <button name="bt_Save_Service">Salvar</button>
