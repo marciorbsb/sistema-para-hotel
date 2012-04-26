@@ -9,12 +9,13 @@
 <body>
 
 <h3> Cadastrar Novo Serviço </h3>
+<form action="../../addService" method="post">
 
-Nome: <input name="nome" type="text"> <br />
-Valor: <input name="valor" type="text">
+Nome: <input name="name" type="text"> <br />
+Valor: <input name="value" type="text">
 <br />
 
 <button name="bt_Save_Service">Salvar</button>
-
+</form>
 </body>
 </html>
