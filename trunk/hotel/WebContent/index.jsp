@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-teste
+<a href="view/service/CreateService.jsp">Cadastrar Serviço </a>
 </body>
 </html>
