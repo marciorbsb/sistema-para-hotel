@@ -58,7 +58,7 @@ public class ServiceDAO {
 	}
 
 	public static ArrayList<Servico> ListServices() {
-		ArrayList<Servico> listServicos = new ArrayList<>();
+		ArrayList<Servico> listServicos = new ArrayList();
 
 		Session session = null;
 		Transaction tx = null;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="APARTAMENTO">
+    <resultMap id="apartamentoResult" class="apartamento">
+        <result property="id" column="id"/>
+        <result property="tipo" column="tipo_id" select="getTipo"/>
+        <result property="numero" column="numero"/>
+    </resultMap>
+
+    
+    <select id="buscarApartamentos"
+            resultMap="apartamentoResult">
+            select apartamento.id, apartamento.tipo_id, apartamento.numero from apartamento where
+            apartamento.id not in(select apartamento.id from apartamento, reserva where apartamento.id=reserva.apartamento_id)
+            and apartamento.tipo_id=#var#;
+    </select>
+    
+    <resultMap id="tipoResult" class="tipo">
+        <result property="id" column="id"/>
+        <result property="nome" column="nome"/>
+        <result property="valor" column="valor"/>
+    </resultMap>
+    
+    <select id="getTipo" resultMap="tipoResult">
+    	Select * from tipo where id=#var#;
+    </select>
+    
+    <select id="getApartamento"
+            resultMap="apartamentoResult">
+            select apartamento.id, apartamento.tipo_id, apartamento.numero from apartamento where
+            apartamento.id =#var#;
+    </select>
+    
+</sqlMap>

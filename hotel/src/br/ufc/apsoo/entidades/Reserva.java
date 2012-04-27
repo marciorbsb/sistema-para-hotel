@@ -1,5 +1,7 @@
 package br.ufc.apsoo.entidades;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -13,6 +15,22 @@ public class Reserva {
 	@OneToOne
 	private Apartamento apartamento;
 	
+	private Calendar dataInicio;
+	
+	private Calendar dataFim;
+	
+	public Calendar getDataInicio() {
+		return dataInicio;
+	}
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+	public Calendar getDataFim() {
+		return dataFim;
+	}
+	public void setDataFim(Calendar dataFim) {
+		this.dataFim = dataFim;
+	}
 	public Long getId() {
 		return id;
 	}

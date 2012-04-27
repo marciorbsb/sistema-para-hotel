@@ -11,15 +11,35 @@
 
 <h3>Dados do Hospede </h3>
 <form action="">
-Nome: <input name="name" type="text"> <br />
-CPF: <input name="cpf" type="text"> <br />
-Rua: <input name="rua" type="text"> <br />
-Bairro: <input name="bairro" type="text"> <br />
-CEP: <input name="cep" type="text"> <br />
-Cidade: <input name="cidade" type="text"> <br />
-Telefone Fixo: <input name="numberFix" type="text"> <br /> 
-Telefone Móvel:<input name="mobile" type="text"> <br />
-
+<table>
+<tr>
+	<td>Nome:</td>
+	<td><input name="name" type="text"></td>
+</tr>
+	<tr>
+		<td>CPF:</td>
+		<td><input name="cpf" type="text"></td>
+	</tr>
+	<tr>
+		<td>Rua:</td>
+		<td> <input name="rua" type="text"></td>
+	</tr><tr>
+		<td>Bairro:</td>
+		<td><input name="bairro" type="text"></td>
+	</tr><tr>
+		<td>CEP:</td>
+		<td><input name="cep" type="text"></td>
+	</tr><tr>
+		<td>Cidade:</td>
+		<td><input name="cidade" type="text"></td>
+	</tr><tr>
+		<td>Telefone Fixo:</td>
+		<td><input name="numberFix" type="text"></td>
+	</tr><tr>
+		<td>Telefone Móvel:</td>
+		<td><input name="mobile" type="text"></td>
+	</tr>
+</table>
 <br />
 
 <h3>Dados do Apartamento </h3>

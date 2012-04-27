@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.sun.istack.internal.NotNull;
 
@@ -15,11 +16,10 @@ public class Apartamento {
 	@GeneratedValue
 	private Long id;
 	@NotNull
-	private String tipo;
+	@OneToOne
+	private Tipo tipo;
 	@NotNull
 	private Integer numero;
-	@NotNull
-	private Float diaria;
 	
 	public Long getId() {
 		return id;
@@ -27,23 +27,17 @@ public class Apartamento {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 	public Integer getNumero() {
 		return numero;
 	}
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public Float getDiaria() {
-		return diaria;
+	public Tipo getTipo() {
+		return tipo;
 	}
-	public void setDiaria(Float diaria) {
-		this.diaria = diaria;
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
-
+	
 }
