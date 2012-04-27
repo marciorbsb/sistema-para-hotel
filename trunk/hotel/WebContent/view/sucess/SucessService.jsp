@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>Operação Realizada com Sucesso!</h1>
-<a href="/sistema-hotel/index.jsp">Voltar</a>
+<a href="index.jsp">Voltar</a>
 </body>
 </html>

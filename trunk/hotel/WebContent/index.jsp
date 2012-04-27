@@ -10,6 +10,6 @@
 <a href="view/service/CreateService.jsp">Cadastrar Serviço </a> <br />
 <a href="view/service/ListService.jsp">Listar Serviços </a> <br /> <br />
 
-<a href="view/hospede/checkin.jsp">Fazer Check In </a>
+<a href="view/hospede/checkin0.jsp">Fazer Check In </a>
 </body>
 </html>

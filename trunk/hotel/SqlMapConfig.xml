@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+
+    <settings
+        cacheModelsEnabled="true"
+        enhancementEnabled="true"
+        lazyLoadingEnabled="true"
+        maxRequests="32"
+        maxSessions="10"
+        maxTransactions="5"
+        useStatementNamespaces="false" />
+
+    <!--aliases-->
+    <typeAlias alias="apartamento" type="br.ufc.apsoo.entidades.Apartamento"/>
+    
+    <!--configuration-->
+    <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+            <property name="JDBC.Driver" value="org.postgresql.Driver"/>
+            <property name="JDBC.ConnectionURL" value="jdbc:postgresql://localhost:5432/hotel"/>
+            <property name="JDBC.Username" value="postgres"/>
+            <property name="JDBC.Password" value="postgres"/>
+        </dataSource>
+    </transactionManager>
+
+    <!--mapping-->
+    <sqlMap resource="br/ufc/apsoo/DAO/ibatis/xml/apartamentos.xml"/>
+    
+</sqlMapConfig>
