@@ -42,8 +42,15 @@ public class ReservaControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
+		String idHospede = request.getParameter("idHospede");
+		
 		String action = request.getParameter("action");
-		if(action!=null){
+		if(type!= null && type.equals("addReserva")){
+			System.out.println("Entrou AddReserva");
+			/*ESTÁ ENTRANDO AQUI, FALTA SÓ ADICIONAR OS CAMPOS DT MARCAO, DTCHEGADA E DTSAIDA NO BANCO*/
+		}else if(action!=null)
+		{
 			if(action.equals("buscarApartamentos")) buscarApartamentos(request, response);
 			if(action.equals("cadastroReserva")) cadastroReserva(request, response);
 			if(action.equals("reservar"))reservar(request, response);

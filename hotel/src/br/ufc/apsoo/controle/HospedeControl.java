@@ -27,8 +27,8 @@ public class HospedeControl extends HttpServlet{
 		String bairro = request.getParameter("bairro");
 		String cep = request.getParameter("cep");
 		String cidade = request.getParameter("cidade");
-		String numberFix = request.getParameter("numberFix");
-		String mobile = request.getParameter("mobile");
+		String telfixo = request.getParameter("telfixo");
+		String telmovel = request.getParameter("telmovel");
 		String daily = request.getParameter("daily");
 		String number = request.getParameter("number");
 		String apType = request.getParameter("apType");
@@ -39,7 +39,7 @@ public class HospedeControl extends HttpServlet{
 
 		if(type.equals("doCheckIn")) //Vem da página checkin
 		{
-			HospedeDAO.addHospede(name, cpf, rua, bairro, cidade, cep, numberFix, mobile);
+			HospedeDAO.addHospede(name, cpf, rua, bairro, cidade, cep, telfixo, telmovel);
 			ApartamentoDAO.addApartamento(daily, number, apType);
 			
 			/*CRIAR METODOS NOS DAO PARA PEGAR O HOSPEDE E O APARTAMENTO PELO ID OU POR QUALQUER OUTRA COISA E CHAMAR ABAIXO*/
@@ -50,6 +50,13 @@ public class HospedeControl extends HttpServlet{
 			request.getSession().setAttribute("apartamentos", apartamentos);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/view/hospede/checkin0.jsp");
+	        rd.forward(request, response);
+		}else if(type.equals("addHospede"))
+		{
+			System.out.println("chegou add HOSPEDE");
+			HospedeDAO.addHospede(name, cpf, rua, bairro, cidade, cep, telfixo, telmovel);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/view/reserva/FazerReserva.jsp");
 	        rd.forward(request, response);
 		}
 		
