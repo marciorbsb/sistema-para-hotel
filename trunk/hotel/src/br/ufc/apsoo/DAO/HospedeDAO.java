@@ -1,5 +1,8 @@
 package br.ufc.apsoo.DAO;
 
+import java.util.ArrayList;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -46,8 +49,9 @@ public class HospedeDAO {
 					.buildSessionFactory();
 			session = factory.openSession();
 			tx = session.beginTransaction();
+			session.save(telefone);
+			session.save(endereco);
 			session.save(hospede); // vamos salvar o usuário
-			session.flush();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null)
@@ -69,6 +73,35 @@ public class HospedeDAO {
 		
 		return true;
 		
+	}
+	
+	public static ArrayList<Hospede> listHospedes()
+	{
+		ArrayList<Hospede> listHospedes = new ArrayList();
+
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Hospede");
+			listHospedes = (ArrayList<Hospede>) query.list();
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return listHospedes;
 	}
 	
 }

@@ -21,14 +21,46 @@ if(Id != null){
 service = ServiceDAO.getServiceById(idLong);
 }
 %>
-Novo Nome: <input name="name" type="text" value="<%=service.getNome()%>"> <br />
-Novo Valor: <input name="value" type="text" value="<%=service.getValor()%>">
+<table>
+<tr>
+<td>Novo Nome: </td> <td><input name="name" type="text" value="<%=service.getNome()%>"></td>
+</tr>
+<tr>
+<td>Novo Valor: </td><td><input name="value" type="text" value="<%=service.getValor()%>"></td>
+</tr>
 <input name="type" type="hidden" value="edit">
 <input name="id" type="hidden" value="<%=idLong%>">
+</table>
 <br />
-
-<button name="bt_Edit_Service">Editar</button>
+<button name="bt_Edit_Service" onclick="return valida()">Editar</button>
 
 </form>
 </body>
+
+<script type="text/javascript">
+function valida()
+{
+	var nome = document.getElementById("name");
+	var valor = document.getElementById("value");
+
+	if(nome.value == "")
+	{
+		alert("Preencha o NOME!");
+		return false;
+	}
+	if(valor.value == "")
+	{
+		alert("Preencha o VALOR!");
+		return false;
+	}
+	if(isNaN(valor.value))
+	{
+		alert("Preencha APENAS NÚMEROS no campo Valor!");
+		return false;
+	}
+return true;
+	}
+</script>
+
+
 </html>
