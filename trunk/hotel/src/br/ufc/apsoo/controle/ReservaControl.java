@@ -1,7 +1,9 @@
 package br.ufc.apsoo.controle;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -44,10 +46,15 @@ public class ReservaControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
 		String idHospede = request.getParameter("idHospede");
-		
+		String dt_inicio = request.getParameter("data_ini");
+		String dt_fim = request.getParameter("data_fim");
 		String action = request.getParameter("action");
 		if(type!= null && type.equals("addReserva")){
 			System.out.println("Entrou AddReserva");
+			SimpleDateFormat sdf = new SimpleDateFormat();
+			sdf.
+			System.out.println(dt_inicio);
+			System.out.println(dt_fim);
 			/*ESTÁ ENTRANDO AQUI, FALTA SÓ ADICIONAR OS CAMPOS DT MARCAO, DTCHEGADA E DTSAIDA NO BANCO*/
 		}else if(action!=null)
 		{
