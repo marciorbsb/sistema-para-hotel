@@ -1,15 +1,19 @@
 package br.ufc.apsoo.entidades;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Generated;
 
 @Entity
 public class Reserva {
 	@Id
+	@GeneratedValue
 	private Long id;
 	@OneToOne
 	private Hospede hospede;

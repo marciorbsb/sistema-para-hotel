@@ -93,11 +93,24 @@ public class ApartamentoDAO {
 	}
 	
 	public static Apartamento buscarApartamento(Long id){
+		Session session = null;
+		Transaction tx = null;
+Apartamento ap = new Apartamento();
 		try {
-			return (Apartamento) PostGresMapConfig.getSqlMapClient().queryForObject("getApartamento", id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Apartamento where id=" + id);
+			ap = (Apartamento)query.list().get(0);
+			return ap;
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
 		}
 		return null;
 	}

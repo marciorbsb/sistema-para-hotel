@@ -1,6 +1,7 @@
 package br.ufc.apsoo.DAO;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.Calendar;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -57,7 +58,14 @@ public class ReservaDAO {
 			reserva.setDataInicio(dt_inicio);
 			reserva.setDataFim(dt_fim);
 			session.save(reserva);
+			
+			/*Depois de salvar a RESERVA tem que mudar a situação do apartamento para não disponível*/
+			//Apartamento apBd = ApartamentoDAO.buscarApartamento(apartamento.getId());
+			//apBd.setDisponivel(false);
+			apartamento.setDisponivel(false);
+			session.update(apartamento);
 			tx.commit();
+			
 		} catch (Exception e) {
 			if (tx != null)
 				tx.rollback();
