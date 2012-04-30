@@ -24,8 +24,13 @@
 </head>
 <body>
 
-<%ArrayList<Apartamento> apartamentos = (ArrayList<Apartamento>) session.getAttribute("apartamentos");%>
-<form action="../../HospedeControl?type=buscarApartamentosLivresReserva" method="post">
+<%ArrayList<Apartamento> apartamentos = (ArrayList<Apartamento>) session.getAttribute("apartamentos");
+if(apartamentos == null){
+%>
+<form action="../../ReservaControl?type=buscarApartamentosLivresReserva" method="get">
+<%}else{ %>
+<form action="ReservaControl?type=buscarApartamentosLivresReserva" method="get">
+<%} %>
 	<label>Tipo do Apartamento</label>
 	<select name="tipoApartamento">
 	       <option value="1">Solteiro</option>
@@ -34,7 +39,7 @@
 	       <option value="4">Quádruplo</option>
 	</select>
 
-	<input type="submit" value="Buscar">
+	
 
 
 	<table border="1">
@@ -49,26 +54,33 @@
 		<%if(apartamentos!=null && apartamentos.size()>0){ %>
 		<%for(Apartamento apartamento:apartamentos){ %>
 		<tbody>
-		<%if(apartamento.isDisponivel()) %> <!-- Só lista os apartamentos disponíveis -->
+		<%if(apartamento.isDisponivel()){ %> <!-- Só lista os apartamentos disponíveis -->
 			<tr>
 				<td><%=apartamento.getNumero()%></td>
 				<td><%=TipoDAO.getTipoById(apartamento.getTipo()).getNome()%></td>
 				<td><%=TipoDAO.getTipoById(apartamento.getTipo()).getValor()%></td>
-				<td><input type="checkbox" id="apartamentos" name="idApartamento" value="<%=apartamento.getId()%>"/> </td>
+				<td><input type="checkbox" id="idApartamento" name="apartamentos" value="<%=apartamento.getId()%>"/> </td>
 			</tr>
 		</tbody>
-		<%} %>
+		<%}
+		} %>
 		<%}else{  %>
 			<h4>Nenhum registro de apartamentos</h4>
 		<%}%>
 	</table> 
+	<input type="hidden" name="type" id="type" value="buscarApartamentosLivresReserva">
+	<input type="submit" value="Buscar">
+	
 	</form>
 
 <h3>Hospedes Cadastrados</h3>
 
 <br/><br/><br/>
-
-<form action="../../ReservaControl" method="post" >
+<%if(apartamentos == null){ %>
+<form action="../../ReservaControl?type=addReserva" method="post" >
+<%}else{ %>
+<form action="ReservaControl?type=addReserva" method="post" >
+<%} %>
 <table border="1">
 <%
 ArrayList<Hospede> hospedes = HospedeDAO.listHospedes();
@@ -102,22 +114,17 @@ if(count % 2 == 1){
 
 <br /><br />
 
-<!-- HTML !--> 
 Data Início: <input type="text" name="data_ini" id="data_ini" size="10" maxlength="10" value="<%=sdf.format(cal.getTime())%>" />
 
 <br /><br />
 
 Data Término: <input type="text" name="data_fim" id="data_fim" size="10" maxlength="10" />
-</form>
 <br /><br />
-
-
-<%if(apartamentos != null){ %> <!-- Consertar problema buscar apartamentos, dava erro na segunda vez por causa do path definido, ele mudava a url para o controle e tentava voltar (../) e dava erro -->
-<form action="ReservaControl?type=addReserva" method="post">
-<%} %>
- <br /><br />
 <button type="submit" onclick="return validar()">Salvar Reserva</button>
 </form>
+
+ 
+
 </body>
 </html>
 
@@ -147,16 +154,39 @@ function validar()
 	if(dt_ini.value == "")
 	{
 		alert('Preencha a data de início!');
+		return false;
 	}
 	if(dt_fim.value == "")
 	{
 		alert('Preencha a data de fim!');
+		return false;
 	}
 	if (! (parseInt( dt_fim.value.split( "/" )[2].toString() + dt_fim.value.split( "/" )[1].toString() + dt_fim.value.split( "/" )[0].toString() ) > parseInt( dt_ini.value.split( "/" )[2].toString() + dt_ini.value.split( "/" )[1].toString() + dt_ini.value.split( "/" )[0].toString() ) ))	{
 		alert('Data de início deve ser MENOR que a data de término!');
 		return false;
 	}
-	return true;
+	
+	salvarSessao();
+	
+	}
+
+	function salvarSessao()
+	{
+		var apartamentos = document.getElementsByName('apartamentos');
+		var ids = '';
+		for (var i=0;i<apartamentos.length;i++){  
+			if (apartamentos[i].checked == true){  
+		    	 ids += apartamentos[i].value+'#';
+		     }
+		}
+			alert(ids);
+			$.ajax({    
+	             type: "POST",    
+	             url: "/sistema-hotel/ReservaControl?",    
+	             data: "type=salvarSessao&data="+ids,  
+	             success: alert('sucesso')
+	        });	
+		
 	}
 
 </script>
