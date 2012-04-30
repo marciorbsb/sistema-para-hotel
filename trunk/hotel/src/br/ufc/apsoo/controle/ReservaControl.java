@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Request;
 
 import br.ufc.apsoo.DAO.ApartamentoDAO;
+import br.ufc.apsoo.DAO.HospedeDAO;
 import br.ufc.apsoo.DAO.ReservaDAO;
 import br.ufc.apsoo.entidades.Apartamento;
 import br.ufc.apsoo.entidades.Hospede;
@@ -28,16 +29,21 @@ public class ReservaControl extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservaControl() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+
+    @Override
+    protected void service(HttpServletRequest arg0, HttpServletResponse arg1)
+    		throws ServletException, IOException {
+    	System.out.println("ENTROU SERVICE ------------------------");
+    	//doPost(request, response);
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
+		System.out.println();
 	}
 
 	/**
@@ -49,10 +55,17 @@ public class ReservaControl extends HttpServlet {
 		String dt_inicio = request.getParameter("data_ini");
 		String dt_fim = request.getParameter("data_fim");
 		String action = request.getParameter("action");
+		//String[] apartamentos = request.getParameterValues("apartamentos");
+		
 		if(type!= null && type.equals("addReserva")){
 			System.out.println("Entrou AddReserva");
 			SimpleDateFormat sdf = new SimpleDateFormat();
-			sdf.
+			
+			Hospede hospede = HospedeDAO.getHospedeById(Long.parseLong(idHospede));
+			//Apartamento apartamento
+			
+			
+			//ReservaDAO.reservar(hospede, apartamento, dt_inicio, dt_fim);
 			System.out.println(dt_inicio);
 			System.out.println(dt_fim);
 			/*ESTÁ ENTRANDO AQUI, FALTA SÓ ADICIONAR OS CAMPOS DT MARCAO, DTCHEGADA E DTSAIDA NO BANCO*/
