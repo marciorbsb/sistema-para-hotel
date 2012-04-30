@@ -1,5 +1,6 @@
 package br.ufc.apsoo.entidades;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -15,20 +16,22 @@ public class Reserva {
 	@OneToOne
 	private Apartamento apartamento;
 	
-	private Calendar dataInicio;
 	
-	private Calendar dataFim;
 	
-	public Calendar getDataInicio() {
+	private Date dataInicio;
+	
+	private Date dataFim;
+	
+	public Date getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	public Calendar getDataFim() {
+	public Date getDataFim() {
 		return dataFim;
 	}
-	public void setDataFim(Calendar dataFim) {
+	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
 	public Long getId() {
@@ -49,6 +52,7 @@ public class Reserva {
 	public void setApartamento(Apartamento apartamento) {
 		this.apartamento = apartamento;
 	}
+	
 	
 	
 }

@@ -1,5 +1,7 @@
 package br.ufc.apsoo.DAO;
 
+import java.sql.Date;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,5 +38,33 @@ public class ReservaDAO {
 		} finally {
 			session.close();
 		}
+	}
+	
+	public static void reservar(Hospede hospede, Apartamento apartamento, Date dt_inicio, Date dt_fim)
+	{
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			
+			tx=session.beginTransaction();
+			Reserva reserva = new Reserva();
+			reserva.setHospede(hospede);
+			reserva.setApartamento(apartamento);
+			reserva.setDataInicio(dt_inicio);
+			reserva.setDataFim(dt_fim);
+			session.save(reserva);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		
 	}
 }

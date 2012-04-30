@@ -104,4 +104,32 @@ public class HospedeDAO {
 		return listHospedes;
 	}
 	
+	public static Hospede getHospedeById(long id)
+	{
+		
+		Session session = null;
+		Transaction tx = null;
+		Hospede hospede = new Hospede();
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Hospede where id=" + id);
+			hospede = (Hospede) query.list().get(0);
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return hospede;
+	}
+	
 }

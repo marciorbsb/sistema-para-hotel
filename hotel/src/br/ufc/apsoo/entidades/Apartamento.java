@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import sun.security.util.BigInt;
+
 import com.sun.istack.internal.NotNull;
 
 @Entity
@@ -16,11 +18,10 @@ public class Apartamento {
 	@GeneratedValue
 	private Long id;
 	@NotNull
-	@OneToOne
-	private Tipo tipo;
+	private int tipo;
 	@NotNull
 	private Integer numero;
-	
+	private boolean disponivel;
 	public Long getId() {
 		return id;
 	}
@@ -33,11 +34,16 @@ public class Apartamento {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public Tipo getTipo() {
+	public int getTipo() {
 		return tipo;
 	}
-	public void setTipo(Tipo tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
 }

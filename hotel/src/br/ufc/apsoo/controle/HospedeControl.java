@@ -58,6 +58,11 @@ public class HospedeControl extends HttpServlet{
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/view/reserva/FazerReserva.jsp");
 	        rd.forward(request, response);
+		}else if(type.equals("buscarApartamentosLivresReserva")){
+			List<Apartamento> apartamentos = ApartamentoDAO.buscarApartamentos(tipoApartamento);
+			request.getSession().setAttribute("apartamentos", apartamentos);
+			RequestDispatcher rd = request.getRequestDispatcher("/view/reserva/FazerReserva.jsp");
+	        rd.forward(request, response);
 		}
 		
 

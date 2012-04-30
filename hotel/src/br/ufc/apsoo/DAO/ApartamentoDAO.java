@@ -1,6 +1,7 @@
 package br.ufc.apsoo.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,9 @@ import br.ufc.apsoo.DAO.config.PostGresMapConfig;
 import br.ufc.apsoo.entidades.Apartamento;
 import br.ufc.apsoo.entidades.Endereco;
 import br.ufc.apsoo.entidades.Hospede;
+import br.ufc.apsoo.entidades.Servico;
 import br.ufc.apsoo.entidades.Telefone;
+import br.ufc.apsoo.entidades.Tipo;
 
 public class ApartamentoDAO {
 	
@@ -54,16 +57,38 @@ public class ApartamentoDAO {
 
 	public static List<Apartamento> buscarApartamentos(String tipoApartamento){
 
-		Map hm = new HashMap(4);
-
-        hm.put("tipoApartamento", tipoApartamento);
         
+        ArrayList<Apartamento> listApartamentos = new ArrayList();
+
+		Session session = null;
+		Transaction tx = null;
+
 		try {
-			return (List<Apartamento>) PostGresMapConfig.getSqlMapClient().queryForList("buscarApartamentos", Long.parseLong(tipoApartamento));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+			/*
+			Query queryTipo = session.createQuery("from Tipo where id="+Integer.parseInt(tipoApartamento));
+			Tipo tipo = (Tipo) queryTipo.list().get(0);
+			*/
+			Query query = session.createQuery("from Apartamento where tipo=" + Integer.parseInt(tipoApartamento));
+			listApartamentos = (ArrayList<Apartamento>) query.list();
+			int x = 0;
+			return listApartamentos;
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
 		}
+		
+        
+	
 		return null;
 	}
 	
