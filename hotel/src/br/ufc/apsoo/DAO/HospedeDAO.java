@@ -8,13 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import sun.security.util.BigInt;
-
 import br.ufc.apsoo.entidades.Apartamento;
 import br.ufc.apsoo.entidades.Endereco;
 import br.ufc.apsoo.entidades.Hospede;
 import br.ufc.apsoo.entidades.Reserva;
-import br.ufc.apsoo.entidades.Servico;
 import br.ufc.apsoo.entidades.Telefone;
 
 public class HospedeDAO {

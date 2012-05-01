@@ -1,15 +1,11 @@
 package br.ufc.apsoo.entidades;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-
-import sun.security.util.BigInt;
 
 import com.sun.istack.internal.NotNull;
+
 
 @Entity
 public class Apartamento {
@@ -18,7 +14,7 @@ public class Apartamento {
 	@GeneratedValue
 	private Long id;
 	@NotNull
-	private int tipo;
+	private Tipo tipo;
 	@NotNull
 	private Integer numero;
 	private boolean disponivel;
@@ -34,10 +30,11 @@ public class Apartamento {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-	public int getTipo() {
+	
+	public Tipo getTipo() {
 		return tipo;
 	}
-	public void setTipo(int tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 	public boolean isDisponivel() {
