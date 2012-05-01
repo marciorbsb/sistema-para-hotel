@@ -20,8 +20,6 @@ public class Reserva {
 	@OneToOne
 	private Apartamento apartamento;
 	
-	
-	
 	private Date dataInicio;
 	
 	private Date dataFim;

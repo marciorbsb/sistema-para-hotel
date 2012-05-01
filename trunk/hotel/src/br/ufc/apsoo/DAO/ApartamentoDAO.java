@@ -1,26 +1,15 @@
 package br.ufc.apsoo.DAO;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 
-import br.ufc.apsoo.DAO.config.PostGresMapConfig;
 import br.ufc.apsoo.entidades.Apartamento;
-import br.ufc.apsoo.entidades.Endereco;
-import br.ufc.apsoo.entidades.Hospede;
-import br.ufc.apsoo.entidades.Servico;
-import br.ufc.apsoo.entidades.Telefone;
-import br.ufc.apsoo.entidades.Tipo;
 
 public class ApartamentoDAO {
 	
