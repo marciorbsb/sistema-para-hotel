@@ -57,7 +57,7 @@ public class ReservaControl extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
-		String idHospede = request.getParameter("idHospede");
+		String idHospede = request.getParameter("radio");
 		String dt_inicio = request.getParameter("data_ini");
 		String dt_fim = request.getParameter("data_fim");
 		String action = request.getParameter("action");
@@ -88,6 +88,11 @@ public class ReservaControl extends HttpServlet {
 					/*date_ini = dfm.parse(dt_inicio);
 					date_fim = dfm.parse(dt_fim);*/
 					ReservaDAO.reservar(hospede, apartamento, date_ini, date_fim);
+					/*DEPOIS DE SALVAR, LIMPA A SESSÃO*/
+					request.getSession().setAttribute("ids", null);
+					
+					RequestDispatcher rd = request.getRequestDispatcher("view/sucess/reservaSucesso.jsp");
+					rd.forward(request, response);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

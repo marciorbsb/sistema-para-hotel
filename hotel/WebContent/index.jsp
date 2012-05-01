@@ -11,5 +11,7 @@
 <a href="view/service/ListService.jsp">Listar Serviços </a> <br /> <br />
 
 <a href="view/hospede/checkin0.jsp">Fazer Check In </a>
+<br />
+<a href="view/reserva/FazerReserva.jsp">Fazer Reserva</a>
 </body>
 </html>

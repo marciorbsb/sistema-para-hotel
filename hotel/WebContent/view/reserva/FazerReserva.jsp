@@ -39,9 +39,6 @@ if(apartamentos == null){
 	       <option value="4">Quádruplo</option>
 	</select>
 
-	
-
-
 	<table border="1">
 		<thead>
 			<tr>
@@ -101,7 +98,7 @@ if(count % 2 == 1){
 	<tr bgcolor="#C0C0C0">
 <%} %>
 <input type="hidden" name="type" id="type" value="addReserva">
-<input type="hidden" name="idHospede" id="idHospede" value="<%=hospede.getId()%>">
+
 
 <td><%=hospede.getNome() %></td>
 <td><%=hospede.getEndereco().getRua()%> - <%=hospede.getEndereco().getBairro()%> - <%=hospede.getEndereco().getCidade()%></td>
@@ -151,6 +148,22 @@ function validar()
 {
 	var dt_ini =  document.getElementById("data_ini");
 	var dt_fim =  document.getElementById("data_fim");
+	var radio =  document.getElementsByName("radio");
+	var hospedeSelecionado = false;
+	for(var h in radio)
+	{
+		
+		if(radio[h].checked)
+		{
+			hospedeSelecionado = true;
+			break;	
+		}
+		
+	}
+	if(!hospedeSelecionado)
+	{
+		alert('Selecione um hospede!');
+	}
 	if(dt_ini.value == "")
 	{
 		alert('Preencha a data de início!');
@@ -166,7 +179,7 @@ function validar()
 		return false;
 	}
 	
-	salvarSessao();
+	return salvarSessao();
 	
 	}
 
@@ -174,6 +187,11 @@ function validar()
 	{
 		var apartamentos = document.getElementsByName('apartamentos');
 		var ids = '';
+		if(apartamentos.length <= 0)
+		{
+			alert('Você deve selecionar um apartamento!');
+			return false;
+		}
 		for (var i=0;i<apartamentos.length;i++){  
 			if (apartamentos[i].checked == true){  
 		    	 ids += apartamentos[i].value+'#';
@@ -186,7 +204,7 @@ function validar()
 	             data: "type=salvarSessao&data="+ids,  
 	             success: alert('sucesso')
 	        });	
-		
+		return true;
 	}
 
 </script>
