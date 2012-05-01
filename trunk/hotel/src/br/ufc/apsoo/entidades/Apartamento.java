@@ -3,6 +3,7 @@ package br.ufc.apsoo.entidades;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.sun.istack.internal.NotNull;
 
@@ -13,6 +14,7 @@ public class Apartamento {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@OneToOne
 	@NotNull
 	private Tipo tipo;
 	@NotNull
