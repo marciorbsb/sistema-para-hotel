@@ -40,13 +40,30 @@ public class ReservaControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String dt_inicio = request.getParameter("data_ini");
+		String dt_fim = request.getParameter("data_fim");
 		String type = request.getParameter("type");
 		String tipoApartamento =request.getParameter("tipoApartamento");
+		
 		if(type != null&& type.equals("buscarApartamentosLivresReserva"))
 		{
+		
+			Date date_ini = null;
+			Date date_fim = null;
+			DateFormat dfm = new SimpleDateFormat("dd/MM/yyyy");
 			
-			List<Apartamento> apartamentos = ApartamentoDAO.buscarApartamentos(tipoApartamento);
+			  try {
+				date_ini = dfm.parse(dt_inicio);
+				date_fim = dfm.parse(dt_fim);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		     
+			List<Apartamento> apartamentos = ApartamentoDAO.buscarApartamentos(tipoApartamento, date_ini, date_fim);
 			request.getSession().setAttribute("apartamentos", apartamentos);
+			request.getSession().setAttribute("dt_ini", date_ini);
+			request.getSession().setAttribute("dt_fim", date_fim);
 			RequestDispatcher rd = request.getRequestDispatcher("/view/reserva/FazerReserva.jsp");
 	        rd.forward(request, response);
 		}
@@ -58,8 +75,8 @@ public class ReservaControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
 		String idHospede = request.getParameter("radio");
-		String dt_inicio = request.getParameter("data_ini");
-		String dt_fim = request.getParameter("data_fim");
+		/*String dt_inicio = request.getParameter("data_ini");
+		String dt_fim = request.getParameter("data_fim");*/
 		String action = request.getParameter("action");
 		String data = request.getParameter("data");
 		
@@ -71,7 +88,6 @@ public class ReservaControl extends HttpServlet {
 		if(type!= null && type.equals("addReserva")){
 			System.out.println("Entrou AddReserva");
 			//SimpleDateFormat sdf = new SimpleDateFormat();
-			DateFormat dfm = new SimpleDateFormat("dd/MM/yy");
 			String[] idsApartamentos = ((String) request.getSession().getAttribute("ids")).split("#");
 			Hospede hospede = HospedeDAO.getHospedeById(Long.parseLong(idHospede));
 			Date date_ini;
@@ -80,32 +96,25 @@ public class ReservaControl extends HttpServlet {
 			{
 				Apartamento apartamento = (Apartamento)ApartamentoDAO.buscarApartamento(Long.parseLong(idsApartamentos[i]));
 				
-				try {
-					
-				    date_ini = dfm.parse(dt_inicio);
-				    date_fim = dfm.parse(dt_fim);
+				    date_ini = (Date) request.getSession().getAttribute("dt_ini");
+				    date_fim = (Date) request.getSession().getAttribute("dt_fim");
 				    
 					/*date_ini = dfm.parse(dt_inicio);
 					date_fim = dfm.parse(dt_fim);*/
 					ReservaDAO.reservar(hospede, apartamento, date_ini, date_fim);
 					/*DEPOIS DE SALVAR, LIMPA A SESSÃO*/
-					request.getSession().setAttribute("ids", null);
+					request.getSession().removeAttribute("ids");					
+					request.getSession().removeAttribute("dt_ini");
+					request.getSession().removeAttribute("dt_fim");
+					request.getSession().removeAttribute("apartamentos");
 					
 					RequestDispatcher rd = request.getRequestDispatcher("view/sucess/reservaSucesso.jsp");
 					rd.forward(request, response);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 				
 			int x = 0;
 				
 			}
-			
-			
-			System.out.println(dt_inicio);
-			System.out.println(dt_fim);
-			/*ESTÁ ENTRANDO AQUI, FALTA SÓ ADICIONAR OS CAMPOS DT MARCAO, DTCHEGADA E DTSAIDA NO BANCO*/
 		}
 		else if(action!=null)
 		{

@@ -19,7 +19,6 @@ public class Apartamento {
 	private Tipo tipo;
 	@NotNull
 	private Integer numero;
-	private boolean disponivel;
 	public Long getId() {
 		return id;
 	}
@@ -38,11 +37,5 @@ public class Apartamento {
 	}
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
-	}
-	public boolean isDisponivel() {
-		return disponivel;
-	}
-	public void setDisponivel(boolean disponivel) {
-		this.disponivel = disponivel;
 	}
 }

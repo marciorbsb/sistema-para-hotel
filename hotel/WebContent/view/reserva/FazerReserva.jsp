@@ -25,6 +25,10 @@
 <body>
 
 <%ArrayList<Apartamento> apartamentos = (ArrayList<Apartamento>) session.getAttribute("apartamentos");
+Calendar cal = Calendar.getInstance();
+String DATE_FORMAT_NOW = "dd/MM/yyyy";
+SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+
 if(apartamentos == null){
 %>
 <form action="../../ReservaControl?type=buscarApartamentosLivresReserva" method="get">
@@ -38,8 +42,7 @@ if(apartamentos == null){
 	       <option value="3">Triplo</option>
 	       <option value="4">Quádruplo</option>
 	</select>
-
-	<table border="1">
+<table border="1">
 		<thead>
 			<tr>
 				<td>Número do Apartamento</td>
@@ -51,20 +54,27 @@ if(apartamentos == null){
 		<%if(apartamentos!=null && apartamentos.size()>0){ %>
 		<%for(Apartamento apartamento:apartamentos){ %>
 		<tbody>
-		<%if(apartamento.isDisponivel()){ %> <!-- Só lista os apartamentos disponíveis -->
 			<tr>
 				<td><%=apartamento.getNumero()%></td>
-				<td><%=TipoDAO.getTipoById(apartamento.getTipo()).getNome()%></td>
-				<td><%=TipoDAO.getTipoById(apartamento.getTipo()).getValor()%></td>
+				<td><%=apartamento.getTipo().getNome()%></td>
+				<td><%=apartamento.getTipo().getValor()%></td>
 				<td><input type="checkbox" id="idApartamento" name="apartamentos" value="<%=apartamento.getId()%>"/> </td>
 			</tr>
 		</tbody>
-		<%}
-		} %>
-		<%}else{  %>
+		<%}%>
 			<h4>Nenhum registro de apartamentos</h4>
 		<%}%>
 	</table> 
+	
+
+
+Data Início: <input type="text" name="data_ini" id="data_ini" size="10" maxlength="10" value="<%=sdf.format(cal.getTime())%>" />
+
+<br /><br />
+
+Data Término: <input type="text" name="data_fim" id="data_fim" size="10" maxlength="10" />
+
+
 	<input type="hidden" name="type" id="type" value="buscarApartamentosLivresReserva">
 	<input type="submit" value="Buscar">
 	
@@ -81,9 +91,8 @@ if(apartamentos == null){
 <table border="1">
 <%
 ArrayList<Hospede> hospedes = HospedeDAO.listHospedes();
-Calendar cal = Calendar.getInstance();
-String DATE_FORMAT_NOW = "dd/MM/yyyy";
-SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+
+
 if(hospedes.size() <= 0)
 {
 	out.write("Não há hospedes cadastrados!");
@@ -111,11 +120,7 @@ if(count % 2 == 1){
 
 <br /><br />
 
-Data Início: <input type="text" name="data_ini" id="data_ini" size="10" maxlength="10" value="<%=sdf.format(cal.getTime())%>" />
 
-<br /><br />
-
-Data Término: <input type="text" name="data_fim" id="data_fim" size="10" maxlength="10" />
 <br /><br />
 <button type="submit" onclick="return validar()">Salvar Reserva</button>
 </form>
@@ -163,6 +168,7 @@ function validar()
 	if(!hospedeSelecionado)
 	{
 		alert('Selecione um hospede!');
+		return false;
 	}
 	if(dt_ini.value == "")
 	{
