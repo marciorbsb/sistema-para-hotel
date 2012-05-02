@@ -62,7 +62,6 @@ public class ReservaDAO {
 			/*Depois de salvar a RESERVA tem que mudar a situação do apartamento para não disponível*/
 			//Apartamento apBd = ApartamentoDAO.buscarApartamento(apartamento.getId());
 			//apBd.setDisponivel(false);
-			apartamento.setDisponivel(false);
 			session.update(apartamento);
 			tx.commit();
 			

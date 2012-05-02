@@ -8,6 +8,6 @@
 </head>
 <body>
 <h2>Reserva Efetuada com Sucesso!</h2>
-<a href="../../index.jsp">Voltar</a>
+<a href="../index.jsp">Voltar</a>
 </body>
 </html>
