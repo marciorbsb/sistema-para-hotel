@@ -74,4 +74,57 @@ public class ReservaDAO {
 		}
 		
 	}
+	
+	public static Reserva buscarPorId(Long id)
+	{
+		Session session = null;
+		Transaction tx = null;
+		
+		Reserva reserva=null;
+		try {
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			
+			tx=session.beginTransaction();
+			Query query = session.createQuery("from Reserva where id=" + id);
+			reserva = (Reserva) query.list().get(0);
+			
+			tx.commit();
+			
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return reserva;
+		
+	}
+	
+	public static void deletarReserva(Reserva reserva)
+	{
+		Session session = null;
+		Transaction tx = null;
+		try {
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			
+			tx=session.beginTransaction();
+			
+			session.delete(reserva);
+			
+			tx.commit();
+			
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		
+	}
 }

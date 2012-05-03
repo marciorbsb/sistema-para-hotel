@@ -1,6 +1,6 @@
 package br.ufc.apsoo.entidades;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,9 +21,9 @@ public class Conta {
 	@NotNull
 	private Hospede hospede;
 	@NotNull
-	private Calendar dataInicio;
+	private Date dataInicio;
 	@NotNull
-	private Calendar dataFim;
+	private Date dataFim;
 	@OneToMany
 	@NotNull
 	private List<Apartamento> apartamentos;
@@ -48,16 +48,16 @@ public class Conta {
 	public void setHospede(Hospede hospede) {
 		this.hospede = hospede;
 	}
-	public Calendar getDataInicio() {
+	public Date getDataInicio() {
 		return dataInicio;
 	}
-	public void setDataInicio(Calendar dataInicio) {
+	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
 	}
-	public Calendar getDataFim() {
+	public Date getDataFim() {
 		return dataFim;
 	}
-	public void setDataFim(Calendar dataFim) {
+	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
 	}
 	public List<Apartamento> getApartamentos() {

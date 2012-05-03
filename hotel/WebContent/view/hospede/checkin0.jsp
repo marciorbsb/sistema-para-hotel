@@ -1,3 +1,4 @@
+<%@page import="br.ufc.apsoo.entidades.Reserva"%>
 <%@page import="br.ufc.apsoo.entidades.Apartamento"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -6,46 +7,57 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Checkin</title>
 </head>
 <body>
-<%List<Apartamento> apartamentos = (List<Apartamento>) session.getAttribute("apartamentos");
+<%List<Reserva> reservas = (List<Reserva>) session.getAttribute("reservas");
+session.removeAttribute("reservas");
+%>
 
-int x=0;%>
-<form action="../../HospedeControl?type=buscarApartamentosLivres" method="post">
-	<label>Tipo do Apartamento</label>
-	<select name="tipoApartamento">
-	       <option value="1">Solteiro</option>
-	       <option value="2">Casal</option>
-	       <option value="3">Triplo</option>
-	       <option value="4">Quádruplo</option>
-	</select>
-	<input type="submit" value="Buscar">
+<form action="<%=getServletContext().getContextPath()%>/HospedeControl?type=buscarReservas" method="post">
+		<h4>Realizar Checkin</h4>
+		<table>
+			<tr> <td>
+				<label>CPF</label>
+				<input type="text" name="cpf" />
+			</td></tr>
+			<tr><td>
+				<label>Nome</label>
+				<input type="text" name="name" />
+			</td></tr>
+		</table>
+		<input type="submit" value="Buscar">
 </form>
+	
+	<%if(reservas!=null && reservas.size()>0){ %>
 	<table border="1">
 		<thead>
 			<tr>
+				<td>Nome</td>
+				<td>Cpf</td>
 				<td>Número do Apartamento</td>
 				<td>Tipo</td>
 				<td>Valor</td>
-				<td></td>
+				<td>Checkin</td>
 			</tr>
 		</thead>
-		<%if(apartamentos!=null && apartamentos.size()>0){ %>
-		<%for(Apartamento apartamento:apartamentos){ %>
 		<tbody>
+		
+		<%for(Reserva reserva : reservas){ %>
+		
 			<tr>
-				<td><%=apartamento.getNumero()%></td>
-				<td><%=apartamento.getTipo().getNome()%></td>
-				<td><%=apartamento.getTipo().getValor()%></td>
-				<td><input type="checkbox"  name="idApartamento" value="<%=apartamento.getId()%>"/> </td>
+				<td><%=reserva.getHospede().getNome()%>
+				<td><%=reserva.getHospede().getCpf()%>
+				<td><%=reserva.getApartamento().getNumero()%></td>
+				<td><%=reserva.getApartamento().getTipo().getNome()%></td>
+				<td><%=reserva.getApartamento().getTipo().getValor()%></td>
+				<td><a href="HospedeControl?type=doCheckIn&idReserva=<%=reserva.getId()%>">OK</a></td>
 			</tr>
-		</tbody>
 		<%} %>
-		<%}else{  %>
-			<h4>Nenhum registro de apartamentos</h4>
-		<%}%>
+		
+		</tbody>
 	</table>
+	<%}%>
 
 </body>
 </html>
