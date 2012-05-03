@@ -1,0 +1,114 @@
+/*------------------------------------------------------------------
+Folha de Estilos - Secao Aluno
+
+Author:         Zarathon Maia
+Project:        SIPPA - Sistema de Presencas e Planos de Aula
+Version:        1.0
+Last change:    24/09/08
+-------------------------------------------------------------------*/
+@import "reset_reloaded.css";
+
+/* Inicio do Layout */
+body{
+    background: #FFEFD5;
+    padding-top:20px;
+    font-family:Tahoma, Helvetica, sans-serif;
+    font-size:14px;
+}
+
+form{
+    background:#fff;
+    border:1px solid #ccc;
+    width:400px;
+    height:auto;
+    margin:auto;
+    padding:10px;
+    display:table;
+    text-align:center;
+}
+
+h1{
+    height: 60px;
+    line-height: 60px;
+    background:url(../images/aluno/calendario.jpg) no-repeat;
+    margin:auto;
+    margin-bottom: 20px;
+    padding-left:70px;
+    color: #FF8000;
+    font-size:16px;
+    font-weight:normal;
+}
+h3{
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    margin:auto;
+    margin-bottom: 20px;
+    padding-left:70px;
+    color: #FF8000;
+    font-size:26px;
+    font-weight:normal;
+}
+
+img{
+    margin-bottom:10px;
+}
+
+p{
+    color:#666666;
+    font-size:12px;
+    margin-left: 3px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+
+.rodape{
+    text-align:center;
+}
+
+.versao{
+    text-align:center;
+    font-size:11px;
+    font-weight:bold;
+    margin-top: 3px;
+
+}
+
+.select{
+    font-family:Tahoma, Helvetica, sans-serif;
+    font-size:12px;
+    color:#666666;
+    width:265px;
+    text-align:center;
+    border:1px solid #efefef;
+}
+
+.botao{
+    font-family:Tahoma, Helvetica, sans-serif;
+    font-size:11px;
+    width:90px;
+    height:20px;
+    border:1px solid #ccc;
+    background: #efefef;
+    color:#666;
+    margin-left:5px;
+    margin-top: 10px;
+    padding:3px;
+}
+
+input{margin:4px; border:1px solid #efefef;}
+
+a, a:visited{color:orange;text-decoration:none; font-weight:bold;}
+a:hover{text-decoration:underline}
+
+.veja{
+    padding:0;
+    width:400px;
+    margin: 0 auto;
+}
+
+.veja ul li{ display:inline;}
+.veja a{color:white;}
+
+/* Fim do Layout */
+

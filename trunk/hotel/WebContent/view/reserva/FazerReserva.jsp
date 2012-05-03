@@ -15,10 +15,10 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
+<link rel="stylesheet" href="<%=getServletContext().getContextPath() %>/css/index.css" type="text/css" media="screen" />
 
 <html>
-<head>
+<head >
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Fazer Reserva</title>
 </head>
@@ -28,13 +28,9 @@
 Calendar cal = Calendar.getInstance();
 String DATE_FORMAT_NOW = "dd/MM/yyyy";
 SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
-
-if(apartamentos == null){
 %>
-<form action="../../ReservaControl?type=buscarApartamentosLivresReserva" method="get">
-<%}else{ %>
-<form action="ReservaControl?type=buscarApartamentosLivresReserva" method="get">
-<%} %>
+<form action="<%=getServletContext().getContextPath() %>/ReservaControl?type=buscarApartamentosLivresReserva" method="get">
+
 	<label>Tipo do Apartamento</label>
 	<select name="tipoApartamento">
 	       <option value="1">Solteiro</option>
@@ -42,6 +38,10 @@ if(apartamentos == null){
 	       <option value="3">Triplo</option>
 	       <option value="4">Quádruplo</option>
 	</select>
+		
+	<br />
+	<br />	
+
 <table border="1">
 		<thead>
 			<tr>
@@ -66,6 +66,8 @@ if(apartamentos == null){
 		<%}%>
 	</table> 
 	
+	<br />
+	<br />
 
 
 Data Início: <input type="text" name="data_ini" id="data_ini" size="10" maxlength="10" value="<%=sdf.format(cal.getTime())%>" />
@@ -74,21 +76,21 @@ Data Início: <input type="text" name="data_ini" id="data_ini" size="10" maxlengt
 
 Data Término: <input type="text" name="data_fim" id="data_fim" size="10" maxlength="10" />
 
+<br /><br />
 
 	<input type="hidden" name="type" id="type" value="buscarApartamentosLivresReserva">
-	<input type="submit" value="Buscar">
+	<input type="submit" value="Buscar" onclick="return validarNulls()">
 	
 	</form>
 
+<br />
+
 <h3>Hospedes Cadastrados</h3>
 
-<br/><br/><br/>
-<%if(apartamentos == null){ %>
-<form action="../../ReservaControl?type=addReserva" method="post" >
-<%}else{ %>
-<form action="ReservaControl?type=addReserva" method="post" >
-<%} %>
-<table border="1">
+
+<form action="<%=getServletContext().getContextPath() %>/ReservaControl?type=addReserva" method="post" >
+
+<table border="1" style="text-align: center;">
 <%
 ArrayList<Hospede> hospedes = HospedeDAO.listHospedes();
 
@@ -116,7 +118,7 @@ if(count % 2 == 1){
 <%count++;} %>
 </table>
 
-<a href="view/hospede/cadastrarHospede.jsp"> Cadastrar novo hospede </a>
+<a href="<%=getServletContext().getContextPath()%>/view/hospede/cadastrarHospede.jsp"> Cadastrar novo hospede </a>
 
 <br /><br />
 
@@ -211,6 +213,27 @@ function validar()
 	             success: alert('sucesso')
 	        });	
 		return true;
+	}
+	
+	function validarNulls()
+	{
+		var dt_ini =  document.getElementById("data_ini");
+		var dt_fim =  document.getElementById("data_fim");
+		
+		if(dt_ini.value == "")
+		{
+			alert('Preencha a data de início!');
+			return false;
+		}
+		if(dt_fim.value == "")
+		{
+			alert('Preencha a data de fim!');
+			return false;
+		}
+		if (! (parseInt( dt_fim.value.split( "/" )[2].toString() + dt_fim.value.split( "/" )[1].toString() + dt_fim.value.split( "/" )[0].toString() ) > parseInt( dt_ini.value.split( "/" )[2].toString() + dt_ini.value.split( "/" )[1].toString() + dt_ini.value.split( "/" )[0].toString() ) ))	{
+			alert('Data de início deve ser MENOR que a data de término!');
+			return false;
+		}
 	}
 
 </script>
