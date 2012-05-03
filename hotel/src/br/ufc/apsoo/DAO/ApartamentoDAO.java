@@ -125,7 +125,8 @@ Apartamento ap = new Apartamento();
 			session = factory.openSession();
 			tx = session.beginTransaction();
 			/*Formato timestamp salvo banco "2012-05-10 00:00:00" */
-			Query query = session.createSQLQuery("select ap.id from apartamento as ap inner join reserva as re on ap.id = re.apartamento_id where '"+ ts_ini +"' not between re.datainicio and re.datafim and ap.tipo_id = 1 and '" + ts_fim +"' not between re.datainicio and re.datafim");
+			Query query = session.createSQLQuery("select apartamento.id from tipo, apartamento where apartamento.tipo_id=tipo.id and apartamento.tipo_id =" + tipoApartamento + " and apartamento.id not in (select ap.id from apartamento ap, reserva re where ap.id = re.apartamento_id and ((re.datainicio  between '" + ts_ini + "' and '" + ts_fim + "')  or (re.datafim between '" + ts_ini + "' and '" + ts_fim + "')) group by (ap.id))");
+			//Query query = session.createSQLQuery("select distinct ap.id from apartamento as ap inner join reserva as re on ap.id = re.apartamento_id where '"+ ts_ini +"' not between re.datainicio and re.datafim and ap.tipo_id = "+ tipoApartamento  + "and '" + ts_fim +"' not between re.datainicio and re.datafim");
 			//listApartamentos = (ArrayList<Apartamento>) query.list();
 			List<BigInteger> listIdsAp = query.list();
 			/*
