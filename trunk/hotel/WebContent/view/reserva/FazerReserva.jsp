@@ -42,7 +42,7 @@ SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 	<br />
 	<br />	
 
-<table border="1">
+<table border="1" style="margin-left: 80px">
 		<thead>
 			<tr>
 				<td>Número do Apartamento</td>
@@ -90,7 +90,7 @@ Data Término: <input type="text" name="data_fim" id="data_fim" size="10" maxleng
 
 <form action="<%=getServletContext().getContextPath() %>/ReservaControl?type=addReserva" method="post" >
 
-<table border="1" style="text-align: center;">
+<table border="1" style="margin-left: 50px">
 <%
 ArrayList<Hospede> hospedes = HospedeDAO.listHospedes();
 

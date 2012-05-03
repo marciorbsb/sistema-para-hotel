@@ -17,7 +17,8 @@
 	<h3>Lista de Serviços Cadastrados</h3>
 
 	<!--  CARREGAR LISTA, POR BOTAO EDITAR E DELETAR DO LADO, AO CLICAR, VAI PARA A PAGINA ESPECIFICA -->
-	<table border="1">
+
+	<table border="1" style="margin-left: 500px;">
 		<%
 			ArrayList<Servico> listServices = new ArrayList();
 			listServices = ServiceDAO.ListServices();
