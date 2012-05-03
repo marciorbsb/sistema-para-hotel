@@ -40,9 +40,9 @@
 	<tbody>
 		<tr>
 			<td><%=apartamento.getNumero()%></td>
-			<td><%=apartamento.getTipo().getNome()%></td>
-			<td><%=apartamento.getTipo().getValor()%></td>
-			<td><a href="ReservaControl?action=cadastroReserva&idApartamento=<%=apartamento.getId()%>">Sim</a></td>
+			<td><%=apartamento.getTipo()%></td>
+			<td><%=apartamento.getTipo()%></td>
+			<td><a href="HospedeControl?action=doCheckin&idReserva=<%=%>">OK</a></td>
 		</tr>
 	</tbody>
 	<%} %>

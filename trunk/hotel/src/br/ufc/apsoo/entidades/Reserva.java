@@ -1,7 +1,8 @@
 package br.ufc.apsoo.entidades;
 
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
