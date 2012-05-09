@@ -1,6 +1,3 @@
-
-
-
 <%@page import="br.ufc.apsoo.DAO.TipoDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -25,6 +22,7 @@
 <body>
 
 <%ArrayList<Apartamento> apartamentos = (ArrayList<Apartamento>) session.getAttribute("apartamentos");
+session.removeAttribute("apartamentos");
 Calendar cal = Calendar.getInstance();
 String DATE_FORMAT_NOW = "dd/MM/yyyy";
 SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
@@ -65,7 +63,7 @@ SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 			<h4>Nenhum registro de apartamentos</h4>
 		<%}%>
 	</table> 
-	
+	<% %>
 	<br />
 	<br />
 
@@ -134,9 +132,9 @@ if(count % 2 == 1){
 
 
 
-<script type="text/javascript" src="http://dl.dropbox.com/u/5691023/libs/jquery.js"></script>
-<script type="text/javascript" src="http://dl.dropbox.com/u/5691023/libs/jquery.click-calendario-1.0.js"></script>
-<link href="http://dl.dropbox.com/u/5691023/libs/jquery.click-calendario-1.0.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="<%=getServletContext().getContextPath()%>/js/jquery.js"></script>
+<script type="text/javascript" src="<%=getServletContext().getContextPath()%>/js/jquery.click-calendario-1.0.js"></script>
+<link href="<%=getServletContext().getContextPath()%>/js/_style/jquery.click-calendario-1.0.css" rel="stylesheet" type="text/css"/>
 
 <script type="text/javascript">
 $('#data_ini').focus(function(){
@@ -205,12 +203,11 @@ function validar()
 		    	 ids += apartamentos[i].value+'#';
 		     }
 		}
-			alert(ids);
 			$.ajax({    
 	             type: "POST",    
 	             url: "/sistema-hotel/ReservaControl?",    
 	             data: "type=salvarSessao&data="+ids,  
-	             success: alert('sucesso')
+	             success: ""
 	        });	
 		return true;
 	}

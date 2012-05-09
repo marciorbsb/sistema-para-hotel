@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sistemas Hotel Quixadá</title>
-<img src="<%=getServletContext().getContextPath() %>/css/logo.png" style='margin-left:200px '/> <br /><br />
+<img src="<%=getServletContext().getContextPath() %>/css/logo.png" style='margin-left:70px '/> <br /><br />
 </head>
 <body>
 <a href="view/service/CreateService.jsp">Cadastrar Serviço </a> <br /><br />

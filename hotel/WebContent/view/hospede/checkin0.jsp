@@ -29,9 +29,9 @@ session.removeAttribute("reservas");
 		</table>
 		<input type="submit" value="Buscar">
 </form>
-	
+	<br /><br />
 	<%if(reservas!=null && reservas.size()>0){ %>
-	<table border="1">
+	<table border="1" style="text-align: center; margin-left: 280px;">
 		<thead>
 			<tr>
 				<td>Nome</td>
