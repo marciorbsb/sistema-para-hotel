@@ -18,7 +18,7 @@
 
 	<!--  CARREGAR LISTA, POR BOTAO EDITAR E DELETAR DO LADO, AO CLICAR, VAI PARA A PAGINA ESPECIFICA -->
 
-	<table border="1" style="margin-left: 500px;">
+	<table border="1" style="margin-left: 370px;">
 		<%
 			ArrayList<Servico> listServices = new ArrayList();
 			listServices = ServiceDAO.ListServices();
