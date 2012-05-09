@@ -33,4 +33,13 @@
     <servlet-name>HospedeControl</servlet-name>
     <url-pattern>/HospedeControl</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ContaControl</servlet-name>
+    <servlet-class>br.ufc.apsoo.controle.ContaControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContaControl</servlet-name>
+    <url-pattern>/ContaControl</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

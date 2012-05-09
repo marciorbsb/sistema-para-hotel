@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,7 +28,7 @@ public class Conta {
 	@OneToMany
 	@NotNull
 	private List<Apartamento> apartamentos;
-	@OneToMany
+	@ManyToMany
 	private List<Servico> servicos;
 	
 	public List<Servico> getServicos() {

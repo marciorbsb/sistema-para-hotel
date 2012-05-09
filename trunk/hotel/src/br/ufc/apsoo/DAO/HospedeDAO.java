@@ -110,6 +110,38 @@ public class HospedeDAO {
 		return listHospedes;
 	}
 	
+	public static ArrayList<Conta> listContaHospedesAtivos()
+	{
+		ArrayList<Conta> listContas = new ArrayList();
+
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Conta");
+			listContas = (ArrayList<Conta>) query.list();
+			
+			return listContas;
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+	
+		return null;
+	}
+	
 	public static Hospede getHospedeById(long id)
 	{
 		
