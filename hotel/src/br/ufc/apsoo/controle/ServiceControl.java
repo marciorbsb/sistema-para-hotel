@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufc.apsoo.DAO.DespesaDAO;
 import br.ufc.apsoo.DAO.ServiceDAO;
 import br.ufc.apsoo.entidades.Servico;
 
@@ -26,6 +27,11 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	String value = request.getParameter("value");
 	String type = request.getParameter("type");
 	String id = request.getParameter("id");
+	String[] idsServicos = request.getParameterValues("despesas");
+	
+	String[] idHospedeidConta = request.getParameter("idHospede").split("#");
+	String idHospede = idHospedeidConta[0]; 
+	String idConta = idHospedeidConta[1];
 	
 	if(type.equals("add")){
 		
@@ -45,6 +51,20 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		Long idLong = Long.parseLong(id);
 		ServiceDAO.deleteService(idLong);
 		RequestDispatcher rd = request.getRequestDispatcher("/view/sucess/SucessService.jsp");
+        rd.forward(request, response);
+	}
+	if(type.equals("lancar"))
+	{
+		System.out.println("\nEntrou lançar serviço\n" + idHospede + "\n" + idsServicos);
+		ArrayList<Long> idsServicosLong = new ArrayList<Long>();
+		
+		for (String idServ : idsServicos) {
+		idsServicosLong.add(Long.parseLong(idServ));	
+		}
+		
+		DespesaDAO.salvarDespesa(Long.parseLong(idConta), idsServicosLong);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/view/sucess/SucessLancamento.jsp");
         rd.forward(request, response);
 	}
 	

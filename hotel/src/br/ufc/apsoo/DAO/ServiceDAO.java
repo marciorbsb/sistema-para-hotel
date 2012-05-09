@@ -68,9 +68,8 @@ public class ServiceDAO {
 			SessionFactory factory = new Configuration().configure()
 					.buildSessionFactory();
 			session = factory.openSession();
-			tx = session.beginTransaction();
 
-			Query query = session.createQuery("from Servico");
+			Query query = session.createQuery("from Servico order by id");
 			listServicos = (ArrayList<Servico>) query.list();
 
 		} catch (Exception e) {
