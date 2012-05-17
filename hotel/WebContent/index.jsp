@@ -13,6 +13,7 @@
 <a href="view/service/ListService.jsp">Listar Serviços </a> <br /> <br />
 
 <a href="view/hospede/checkin0.jsp">Fazer Check In </a> <br /><br />
+<a href="view/conta/checkout.jsp">Fazer CheckOut </a> <br /><br />
 
 <a href="view/reserva/FazerReserva.jsp">Fazer Reserva</a>
 </body>

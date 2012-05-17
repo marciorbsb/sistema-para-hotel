@@ -1,10 +1,8 @@
 package br.ufc.apsoo.DAO;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,10 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.math.*;
-
 import br.ufc.apsoo.entidades.Conta;
-import br.ufc.apsoo.entidades.Despesa;
 import br.ufc.apsoo.entidades.Hospede;
 import br.ufc.apsoo.entidades.Servico;
 
@@ -64,13 +59,13 @@ public class DespesaDAO {
 	{
 		Session session = null;
 		Transaction tx = null;
-		ArrayList<BigInteger> listIdsConta = new ArrayList<>();
-		ArrayList<BigInteger> listIdsServicos = new ArrayList<>();
+		ArrayList<BigInteger> listIdsConta = new ArrayList<BigInteger>();
+		ArrayList<BigInteger> listIdsServicos = new ArrayList<BigInteger>();
 		
-		ArrayList<Hospede> listHospede = new ArrayList<>();
-		ArrayList<Servico> listServico = new ArrayList<>();
+		ArrayList<Hospede> listHospede = new ArrayList<Hospede>();
+		ArrayList<Servico> listServico = new ArrayList<Servico>();
 		
-		HashMap<Hospede, HashMap<Conta, Servico>> listHospedeServico = new HashMap<>();
+		HashMap<Hospede, HashMap<Conta, Servico>> listHospedeServico = new HashMap<Hospede, HashMap<Conta, Servico>>();
 		
 		try {
 			SessionFactory factory = new Configuration().configure()
@@ -91,7 +86,7 @@ public class DespesaDAO {
 			}
 			
 			for(int i=0; i<listHospede.size(); i++){
-				HashMap<Conta, Servico> mapCS = new HashMap<>();
+				HashMap<Conta, Servico> mapCS = new HashMap<Conta, Servico>();
 				mapCS.put(ContaDAO.getContaById(listIdsConta.get(i).longValue()), listServico.get(i));
 				listHospedeServico.put(listHospede.get(i), mapCS);
 			}

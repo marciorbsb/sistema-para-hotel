@@ -1,5 +1,6 @@
 package br.ufc.apsoo.DAO;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -207,5 +208,33 @@ public class ServiceDAO {
 		}
 		return true;
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<BigInteger> getServicesByIdConta(long id) {
+		List<BigInteger> servicos = null;
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createSQLQuery("select servicos_id from conta_servico where conta_id=" + id);
+			servicos = query.list();
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return servicos;
 	}
 }

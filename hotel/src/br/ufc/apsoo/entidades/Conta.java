@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import com.sun.istack.internal.NotNull;
 
@@ -30,7 +31,20 @@ public class Conta {
 	private List<Apartamento> apartamentos;
 	@ManyToMany
 	private List<Servico> servicos;
+	@Transient
+	private String total;
 	
+	public String getTotal() {
+		Float valor = new Float(0);
+		for(Servico servico: servicos){
+			valor = valor + servico.getValor();
+		}
+		total = valor.toString();
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
 	public List<Servico> getServicos() {
 		return servicos;
 	}
