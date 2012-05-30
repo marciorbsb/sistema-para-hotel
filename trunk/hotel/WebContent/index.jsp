@@ -15,6 +15,11 @@
 <a href="view/hospede/checkin0.jsp">Fazer Check In </a> <br /><br />
 <a href="view/conta/checkout.jsp">Fazer CheckOut </a> <br /><br />
 
-<a href="view/reserva/FazerReserva.jsp">Fazer Reserva</a>
+<a href="view/reserva/FazerReserva.jsp">Fazer Reserva</a> <br /><br />
+
+<a href="view/questoes/TaxaOcupacao.jsp">Taxa de Ocupacao</a> <br /><br />
+
+<a href="view/questoes/OndeEstaHospede.jsp">Onde está o Hospede?</a> <br /><br />
+
 </body>
 </html>

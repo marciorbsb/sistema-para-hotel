@@ -1,5 +1,6 @@
 package br.ufc.apsoo.DAO;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -243,5 +244,62 @@ public class HospedeDAO {
 		}
 	}
 	
+	public static List<Hospede> getHospedeByName(String nome)
+	{
+		Session session = null;
+		Transaction tx = null;
+		List<Hospede> listHospede =  new ArrayList<>();
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createQuery("from Hospede where nome like '" + nome + "%'" );
+			listHospede = (List<Hospede>) query.list();
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		return listHospede;
+		
+	}
+	//Retorna o ID dos apartamentos
+	public static List<BigInteger> getApartamentoByHospedeId(String idHospede)
+	{
+		Session session = null;
+		Transaction tx = null;
+		List<BigInteger> listApartamentoId =  new ArrayList<>();
+		try {
+
+			SessionFactory factory = new Configuration().configure()
+					.buildSessionFactory();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+
+			Query query = session.createSQLQuery("select apartamentos_id from conta_apartamento ca," +
+					" conta co where co.hospede_id = " + idHospede + " and co.id = ca.conta_id");
+			listApartamentoId = (List<BigInteger>) query.list();
+
+		} catch (Exception e) {
+			// houve algum problema? vamos retornar o banco de dados
+			// ao seu estado anterior
+			if (tx != null)
+				tx.rollback();
+			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		
+	return listApartamentoId;
+	}
 	
 }
