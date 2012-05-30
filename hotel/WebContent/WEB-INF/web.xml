@@ -41,5 +41,12 @@
     <servlet-name>ContaControl</servlet-name>
     <url-pattern>/ContaControl</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+      <servlet-name>QueryControl</servlet-name>
+      <servlet-class>br.ufc.apsoo.controle.QueriesControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>QueryControl</servlet-name>
+      <url-pattern>/QueryControl</url-pattern>
+  </servlet-mapping>
 </web-app>
