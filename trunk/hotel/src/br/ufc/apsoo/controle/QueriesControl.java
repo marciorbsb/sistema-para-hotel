@@ -18,11 +18,11 @@ import br.ufc.apsoo.DAO.ApartamentoDAO;
 import br.ufc.apsoo.DAO.HospedeDAO;
 import br.ufc.apsoo.entidades.Apartamento;
 import br.ufc.apsoo.entidades.Hospede;
-import br.ufc.apsoo.entidades.Reserva;
 import br.ufc.apsoo.entidades.Tipo;
 
 public class QueriesControl extends HttpServlet {
 
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 	{
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
@@ -40,10 +40,10 @@ public class QueriesControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		List<Tipo> tiposApartamento = ApartamentoDAO.getTiposApartamento();
-		ArrayList<List<Apartamento>> listApartamentosLivres = new ArrayList<>();
+		ArrayList<List<Apartamento>> listApartamentosLivres = new ArrayList();
 		
-		List<List<Apartamento>> listListApartamentosOcup = new ArrayList<>();
-		List<List<Apartamento>> listListTodosApartamentos = new ArrayList<>();
+		List<List<Apartamento>> listListApartamentosOcup = new ArrayList();
+		List<List<Apartamento>> listListTodosApartamentos = new ArrayList();
 		
 		
 		for(int i=0; i<tiposApartamento.size(); i++){
@@ -55,7 +55,7 @@ public class QueriesControl extends HttpServlet {
 		
 		
 		
-		List<Integer> apartamentosOcupTotal = new ArrayList<>();
+		List<Integer> apartamentosOcupTotal = new ArrayList();
 		
 		for(int i=0; i<listListApartamentosOcup.size(); i++){
 			if(listListTodosApartamentos.get(i).size() != 0 && listListApartamentosOcup.get(i).size() != 0 ){
@@ -108,7 +108,7 @@ public class QueriesControl extends HttpServlet {
 		String hospedeOndeEstouId = request.getParameter("hospedeOndeEstou");
 		
 		List<BigInteger> listApartamentosId = HospedeDAO.getApartamentoByHospedeId(hospedeOndeEstouId);
-		List<Apartamento> listApartamentos = new ArrayList<>();
+		List<Apartamento> listApartamentos = new ArrayList();
 		for (BigInteger idAp : listApartamentosId) {
 			listApartamentos.add(ApartamentoDAO.buscarApartamento(idAp.longValue()));
 		}

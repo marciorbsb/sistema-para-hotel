@@ -200,12 +200,12 @@ function validar()
 		}
 		for (var i=0;i<apartamentos.length;i++){  
 			if (apartamentos[i].checked == true){  
-		    	 ids += apartamentos[i].value+'#';
+				ids += apartamentos[i].value+'#';
 		     }
 		}
 			$.ajax({    
 	             type: "POST",    
-	             url: "/sistema-hotel/ReservaControl?",    
+	             url: "<%=getServletContext().getContextPath()%>/ReservaControl?",    
 	             data: "type=salvarSessao&data="+ids,  
 	             success: ""
 	        });	

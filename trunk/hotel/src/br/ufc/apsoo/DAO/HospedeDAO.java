@@ -2,7 +2,6 @@ package br.ufc.apsoo.DAO;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -248,7 +247,7 @@ public class HospedeDAO {
 	{
 		Session session = null;
 		Transaction tx = null;
-		List<Hospede> listHospede =  new ArrayList<>();
+		List<Hospede> listHospede =  new ArrayList();
 		try {
 
 			SessionFactory factory = new Configuration().configure()
@@ -276,7 +275,7 @@ public class HospedeDAO {
 	{
 		Session session = null;
 		Transaction tx = null;
-		List<BigInteger> listApartamentoId =  new ArrayList<>();
+		List<BigInteger> listApartamentoId =  new ArrayList();
 		try {
 
 			SessionFactory factory = new Configuration().configure()

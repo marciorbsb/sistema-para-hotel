@@ -2,6 +2,7 @@ package br.ufc.apsoo.controle;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ufc.apsoo.DAO.DespesaDAO;
 import br.ufc.apsoo.DAO.ServiceDAO;
+import br.ufc.apsoo.DTO.EvolucaoDTO;
+import br.ufc.apsoo.DTO.ServicoDTO;
 import br.ufc.apsoo.entidades.Servico;
 
 public class ServiceControl extends HttpServlet{
@@ -29,9 +32,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	String id = request.getParameter("id");
 	String[] idsServicos = request.getParameterValues("despesas");
 	
-	String[] idHospedeidConta = request.getParameter("idHospede").split("#");
-	String idHospede = idHospedeidConta[0]; 
-	String idConta = idHospedeidConta[1];
+	
 	
 	if(type.equals("add")){
 		
@@ -39,6 +40,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	
 	}else if(type.equals("edit"))
 	{
+		/*Estorno*/
 		//Servico service = ServiceDAO.getServiceByNameAndValue(name, Float.parseFloat(value)); //testado, pegando objeto
 		System.out.println("ID da peste: " + id);
 		Long idLong = Long.parseLong(id);
@@ -55,6 +57,10 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	}
 	if(type.equals("lancar"))
 	{
+		String[] idHospedeidConta = request.getParameter("idHospede").split("#");
+		String idHospede = idHospedeidConta[0]; 
+		String idConta = idHospedeidConta[1];
+		
 		System.out.println("\nEntrou lançar serviço\n" + idHospede + "\n" + idsServicos);
 		ArrayList<Long> idsServicosLong = new ArrayList<Long>();
 		
@@ -65,6 +71,18 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		DespesaDAO.salvarDespesa(Long.parseLong(idConta), idsServicosLong);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/view/sucess/SucessLancamento.jsp");
+        rd.forward(request, response);
+	}
+	if(type.equals("evolucao")){
+		List<EvolucaoDTO> evolucaoDTO= ServiceDAO.getEvolucao();
+		request.getSession().setAttribute("meses", evolucaoDTO);
+		RequestDispatcher rd = request.getRequestDispatcher("/view/conta/evolucao.jsp");
+        rd.forward(request, response);
+	}
+	if(type.equals("ultimomes")){
+		List<ServicoDTO> servicoDTO= ServiceDAO.getServicosUltimoMes();
+		request.getSession().setAttribute("tservicos", servicoDTO);
+		RequestDispatcher rd = request.getRequestDispatcher("/view/service/UltimosServicos.jsp");
         rd.forward(request, response);
 	}
 	

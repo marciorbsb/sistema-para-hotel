@@ -21,5 +21,9 @@
 
 <a href="view/questoes/OndeEstaHospede.jsp">Onde está o Hospede?</a> <br /><br />
 
+<a href="<%=getServletContext().getContextPath() %>/addService?type=evolucao">Evolucao dos ultimos tres meses</a> <br /><br />
+
+<a href="<%=getServletContext().getContextPath() %>/addService?type=ultimomes">Serviços do ultimo mês</a> <br /><br />
+
 </body>
 </html>
