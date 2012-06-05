@@ -7,6 +7,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.ufc.apsoo.entidades.Tipo"%>
+<link rel="stylesheet" href="<%=getServletContext().getContextPath() %>/css/index.css" type="text/css" media="screen" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,7 +34,7 @@ List<Tipo> listTipos	 = (ArrayList<Tipo>)session.getAttribute("listTipos");
 
 <br /><br />
 
-<table border="1">
+<table border="1" align="center">
 <%
 if(listTipos != null){
 int k=0;
