@@ -205,7 +205,7 @@ select ap.id from apartamento as ap inner join reserva as re on ap.id = re.apart
 	{
 		Session session = null;
 		Transaction tx = null;
-		List<Tipo> tipos = new ArrayList<>();
+		List<Tipo> tipos = new ArrayList();
 		
 			SessionFactory factory = new Configuration().configure()
 					.buildSessionFactory();
@@ -221,7 +221,7 @@ select ap.id from apartamento as ap inner join reserva as re on ap.id = re.apart
 	{
 		Session session = null;
 		Transaction tx = null;
-		List<Apartamento> apartamentos = new ArrayList<>();
+		List<Apartamento> apartamentos = new ArrayList();
 		
 			SessionFactory factory = new Configuration().configure()
 					.buildSessionFactory();

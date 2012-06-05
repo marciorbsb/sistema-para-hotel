@@ -10,7 +10,7 @@
 <body>
 
 <h3> Cadastrar Novo Serviço </h3>
-<form action="../../addService" method="get">
+<form action="<%=getServletContext().getContextPath()%>/addService" method="get">
 <table>
 <tr>
 <td>Nome:</td> <td><input name="name" id="name" type="text"></td>

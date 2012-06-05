@@ -12,7 +12,7 @@
 <body>
 
 <h3> Editar Serviço </h3>
-<form action="../../addService">
+<form action="<%=getServletContext().getContextPath()%>/addService">
 <%
 String Id = request.getParameter("id");
 long idLong = Long.parseLong(Id);

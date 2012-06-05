@@ -55,6 +55,9 @@ public class ContaControl extends HttpServlet {
 		if(type.equals("estornarDespesa"))
 		{
 			DespesaDAO.estornarDespesa(Long.parseLong(CId), Long.parseLong(SId));
+			RequestDispatcher rd = request
+					.getRequestDispatcher("/view/sucess/SucessLancamento.jsp");
+			rd.forward(request, response);
 			
 		}else if(type.equals("buscarConta")){
 			Long longCpf = null;
